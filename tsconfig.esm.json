@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    // Import siblings as "./x.js": the specifier is copied into the emitted .d.ts,
+    // so "./x.ts" would ship a path consumers cannot resolve.
+    "allowImportingTsExtensions": false,
+    "rootDir": "src",
+    "outDir": "dist/esm",
+    "declaration": true,
+    "noEmit": false
+  },
+  "include": ["src/index.ts"]
+}

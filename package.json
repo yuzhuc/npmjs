@@ -1,0 +1,76 @@
+{
+  "name": "npmjs",
+  "version": "0.0.1",
+  "description": "An npm package demo template",
+  "keywords": [
+    "template",
+    "typescript",
+    "bun",
+    "esm"
+  ],
+  "homepage": "https://github.com/your-name/npmjs#readme",
+  "bugs": {
+    "url": "https://github.com/your-name/npmjs/issues",
+    "email": "you@example.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Your Name",
+    "email": "you@example.com",
+    "url": "https://example.com"
+  },
+  "contributors": [],
+  "funding": {
+    "type": "individual",
+    "url": "https://example.com/sponsor"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-name/npmjs.git"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "bun run clean && bun run build:esm && bun run build:cjs && bun run build:markers",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:markers": "cp build/esm.package.json dist/esm/package.json && cp build/cjs.package.json dist/cjs/package.json",
+    "test": "bun test src",
+    "test:dist": "bun run build && bun test test/dist.test.ts",
+    "typecheck": "tsc --noEmit",
+    "prepack": "bun run build",
+    "prepublishOnly": "bun run typecheck && bun run test && bun run test:dist"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^7"
+  },
+  "engines": {
+    "node": ">=20",
+    "bun": ">=1.4.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "bun@1.4.2"
+}

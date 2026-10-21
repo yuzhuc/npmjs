@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": false,
+    "allowImportingTsExtensions": false,
+    "rootDir": "src",
+    "outDir": "dist/cjs",
+    "declaration": true,
+    "noEmit": false
+  },
+  "include": ["src/index.ts"]
+}
