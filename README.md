@@ -11,7 +11,7 @@ bun install
 ## Develop
 
 ```bash
-bun run typecheck   # tsc --noEmit (no emit, so a dry run)
+bun run typecheck   # tsc --noEmit
 bun run build       # clean dist, build ESM + CJS, copy the type markers
 ```
 
@@ -28,8 +28,9 @@ behind), then runs one tsc config per module format:
 | `tsconfig.cjs.json` | `dist/cjs/index.js` + `index.d.ts` | CJS (`require`) |
 
 Node picks the format from the nearest `package.json`, and the root one says
-`"type": "module"` — so the build copies `{esm,cjs}.package.json` from the repo root into each
-output directory to mark it. That step is why the build is not purely config-driven.
+`"type": "module"` — so the build copies `{esm,cjs}.package.json` from the repo root
+into each output directory to mark it. That step is why the build is not purely
+config-driven.
 
 `prepack` typechecks and builds before packing or publishing.
 
@@ -43,7 +44,7 @@ const { greet } = require("npmjs"); // CJS
 ## `package.json` reference
 
 JSON has no comments, so the fields are explained here. The `tsconfig` files carry
-their own inline comments.
+comments where a setting needs one.
 
 ### Identity
 
@@ -54,9 +55,8 @@ their own inline comments.
 | `description` | One line for npm search and the package page. |
 | `keywords` | Search terms. |
 | `license` | SPDX identifier; keep `LICENSE` in sync. |
-| `author` / `contributors` | Who wrote it. `contributors` is optional; delete it if empty. |
+| `author` | Who wrote it. |
 | `homepage` / `repository` / `bugs` | Where users read docs, browse source and file issues. |
-| `funding` | Sponsor link shown on the package page. Delete if unused. |
 
 ### Entry points
 
@@ -95,27 +95,19 @@ their own inline comments.
 
 ## Publish
 
+Publishing runs in CI (`.github/workflows/publish.yml`), triggered by publishing a
+GitHub Release or starting the workflow manually. It runs:
+
 ```bash
-bun publish
+npm publish --provenance --access public
 ```
 
-`files` limits the tarball to `dist`; `README.md`, `LICENSE` and `package.json` are always included.
+Requirements:
 
-## Before publishing
+- `NPM_TOKEN` in the repository secrets.
+- `repository.url` in `package.json` must match the GitHub repo, or provenance fails.
+  Provenance needs GitHub's OIDC token, so a local `npm publish` cannot do it.
 
-Change these in `package.json`:
+`files` limits the tarball to `dist`.
 
-| Field | What to put there |
-| --- | --- |
-| `name` | Your package name. Unscoped names must be unique on npm; scoped (`@you/npmjs`) if unsure. |
-| `version` | Start at `1.0.0` for a real release (semver). npm rejects a version that already exists. |
-| `description` | One line shown in npm search results. |
-| `keywords` | Search terms. |
-| `homepage` / `repository` / `bugs` | Your repo URLs. |
-| `author` | Your name, email, site. |
-| `contributors` | Co-authors; delete the field if there are none. |
-| `funding` | Sponsorship link; delete if unused. |
-| `license` | SPDX id. Keep `LICENSE` in sync. |
-| `engines.node` | Minimum Node your code supports. |
-
-Also rename `npmjs` in `LICENSE` (the copyright holder).
+`LICENSE` must name the actual copyright holder; it is not covered by `files`.

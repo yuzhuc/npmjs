@@ -1,6 +1,6 @@
 {
   "name": "npmjs",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An npm package demo template",
   "keywords": [
     "template",
@@ -8,21 +8,21 @@
     "bun",
     "esm"
   ],
-  "homepage": "https://github.com/your-name/npmjs#readme",
+  "homepage": "https://github.com/yuzhuc/npmjs#readme",
   "bugs": {
-    "url": "https://github.com/your-name/npmjs/issues",
-    "email": "you@example.com"
+    "url": "https://github.com/yuzhuc/npmjs/issues",
+    "email": "mail@arsfox.com"
   },
   "license": "MIT",
   "author": {
-    "name": "Your Name",
-    "email": "you@example.com",
-    "url": "https://example.com"
+    "name": "yuzhuc",
+    "email": "mail@arsfox.com",
+    "url": "https://arsfox.com"
   },
   "contributors": [],
   "funding": {
     "type": "individual",
-    "url": "https://example.com/sponsor"
+    "url": "https://arsfox.com/sponsor"
   },
   "files": [
     "dist"
@@ -47,7 +47,7 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-name/npmjs.git"
+    "url": "git+https://github.com/yuzhuc/npmjs.git"
   },
   "scripts": {
     "clean": "rm -rf dist",
