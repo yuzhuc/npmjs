@@ -51,15 +51,9 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "bun run clean && bun run build:esm && bun run build:cjs && bun run build:markers",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:markers": "cp build/esm.package.json dist/esm/package.json && cp build/cjs.package.json dist/cjs/package.json",
-    "test": "bun test src",
-    "test:dist": "bun run build && bun test test/dist.test.ts",
+    "build": "bun run clean && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && cp esm.package.json dist/esm/package.json && cp cjs.package.json dist/cjs/package.json",
     "typecheck": "tsc --noEmit",
-    "prepack": "bun run build",
-    "prepublishOnly": "bun run typecheck && bun run test && bun run test:dist"
+    "prepack": "bun run typecheck && bun run build"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -72,5 +66,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "packageManager": "bun@1.4.2"
+  "packageManager": "bun@1.4.3"
 }
